@@ -188,15 +188,48 @@ namespace Practico11ProgI.Windows
 
         private void tsbBuscar_Click(object sender, EventArgs e)
         {
-            string dniString = Microsoft.VisualBasic.Interaction.InputBox("Ingrese el DNI",
-                "Buscar por DNI", "0");
-            if (string.IsNullOrEmpty(dniString))
+            while (true)
             {
-                return;
+                string dniString = Microsoft.VisualBasic.Interaction.InputBox("Ingrese el DNI",
+        "Buscar por DNI", "0");
+                if (string.IsNullOrEmpty(dniString))
+                {
+                    return;
+                }
+                if (ValidoDni(dniString))
+                {
+                    bool existe = repo.BuscarPorDni(int.Parse(dniString));
+                    if (existe)
+                    {
+                        SeleccionarFila(int.Parse(dniString));
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("DNI no encontrado", "Mensaje",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("DNI no válido", "Mensaje",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
             }
-            if (ValidoDni(dniString))
+        }
+
+        private void SeleccionarFila(int dni)
+        {
+            dgvDatos.ClearSelection();
+            foreach (DataGridViewRow item in dgvDatos.Rows)
             {
-                bool existe = repo.BuscarPorDni(int.Parse(dniString));
+                if ((int)item.Cells[0].Value == dni)
+                {
+                    item.Selected = true;
+                }
             }
         }
 
@@ -213,5 +246,23 @@ namespace Practico11ProgI.Windows
             return true;
         }
 
+        private void edad09ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listaSocios = repo.OrdernarAsc();
+            MostrarDatosEnGrilla();
+        }
+
+        private void edad90ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listaSocios = repo.OrdernarDesc();
+            MostrarDatosEnGrilla();
+
+        }
+
+        private void socioAZToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listaSocios = repo.OrdenarAlfa();
+            MostrarDatosEnGrilla();
+        }
     }
 }

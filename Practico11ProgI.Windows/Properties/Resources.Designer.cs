@@ -73,6 +73,16 @@ namespace Practico11ProgI.Windows.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap alphabetical_sorting_480px {
+            get {
+                object obj = ResourceManager.GetObject("alphabetical_sorting_480px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap content_48px {
             get {
                 object obj = ResourceManager.GetObject("content_48px", resourceCulture);
@@ -123,6 +133,26 @@ namespace Practico11ProgI.Windows.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap numerical_sorting_12_480px {
+            get {
+                object obj = ResourceManager.GetObject("numerical_sorting_12_480px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap numerical_sorting_21_480px {
+            get {
+                object obj = ResourceManager.GetObject("numerical_sorting_21_480px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap restart_48px {
             get {
                 object obj = ResourceManager.GetObject("restart_48px", resourceCulture);
@@ -136,6 +166,16 @@ namespace Practico11ProgI.Windows.Properties {
         internal static System.Drawing.Bitmap search_48px {
             get {
                 object obj = ResourceManager.GetObject("search_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sorting_arrows_48px {
+            get {
+                object obj = ResourceManager.GetObject("sorting_arrows_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

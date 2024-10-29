@@ -126,5 +126,23 @@ namespace Practico11ProgI.Datos
         {
             return socios!.Any(s => s.Dni == dniBuscado);
         }
+
+        public List<Persona>? OrdernarAsc()
+        {
+            return socios!.OrderBy(s => s.GetEdad()).ToList();
+        }
+
+        public List<Persona>? OrdernarDesc()
+        {
+            return socios!.OrderByDescending(s => s.GetEdad()).ToList();
+        }
+
+        public List<Persona>? OrdenarAlfa()
+        {
+            return socios!.OrderBy(s => s.Apellido)
+                .ThenBy(s => s.PrimerNombre)
+                .ThenBy(s => s.SegundoNombre)
+                .ThenBy(s => s.TercerNombre).ToList();
+        }
     }
 }

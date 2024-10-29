@@ -42,6 +42,10 @@
             tsbBuscar = new ToolStripButton();
             tsbActualizar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
+            tsbOrdenar = new ToolStripDropDownButton();
+            edad09ToolStripMenuItem = new ToolStripMenuItem();
+            edad90ToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
             tsbSalir = new ToolStripButton();
             panelInformacion = new Panel();
             txtCantidad = new TextBox();
@@ -53,6 +57,7 @@
             colEdad = new DataGridViewTextBoxColumn();
             colCategoria = new DataGridViewTextBoxColumn();
             colGenero = new DataGridViewTextBoxColumn();
+            socioAZToolStripMenuItem = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             panelInformacion.SuspendLayout();
             panelGrilla.SuspendLayout();
@@ -61,7 +66,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbNuevo, tsbBorrar, tsbEditar, tsbDetalles, toolStripSeparator1, tsbFiltrar, tsbBuscar, tsbActualizar, toolStripSeparator2, tsbSalir });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbNuevo, tsbBorrar, tsbEditar, tsbDetalles, toolStripSeparator1, tsbFiltrar, tsbBuscar, tsbActualizar, toolStripSeparator2, tsbOrdenar, toolStripSeparator3, tsbSalir });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 70);
@@ -180,6 +185,38 @@
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(6, 70);
             // 
+            // tsbOrdenar
+            // 
+            tsbOrdenar.DropDownItems.AddRange(new ToolStripItem[] { edad09ToolStripMenuItem, edad90ToolStripMenuItem, socioAZToolStripMenuItem });
+            tsbOrdenar.Image = Properties.Resources.sorting_arrows_48px;
+            tsbOrdenar.ImageScaling = ToolStripItemImageScaling.None;
+            tsbOrdenar.ImageTransparentColor = Color.Magenta;
+            tsbOrdenar.Name = "tsbOrdenar";
+            tsbOrdenar.Size = new Size(63, 67);
+            tsbOrdenar.Text = "Ordenar";
+            tsbOrdenar.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // edad09ToolStripMenuItem
+            // 
+            edad09ToolStripMenuItem.Image = Properties.Resources.numerical_sorting_12_480px;
+            edad09ToolStripMenuItem.Name = "edad09ToolStripMenuItem";
+            edad09ToolStripMenuItem.Size = new Size(180, 22);
+            edad09ToolStripMenuItem.Text = "Edad (0-9)";
+            edad09ToolStripMenuItem.Click += edad09ToolStripMenuItem_Click;
+            // 
+            // edad90ToolStripMenuItem
+            // 
+            edad90ToolStripMenuItem.Image = Properties.Resources.numerical_sorting_21_480px;
+            edad90ToolStripMenuItem.Name = "edad90ToolStripMenuItem";
+            edad90ToolStripMenuItem.Size = new Size(180, 22);
+            edad90ToolStripMenuItem.Text = "Edad (9-0)";
+            edad90ToolStripMenuItem.Click += edad90ToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 70);
+            // 
             // tsbSalir
             // 
             tsbSalir.Image = Properties.Resources.exit_48px;
@@ -237,6 +274,7 @@
             dgvDatos.Location = new Point(0, 0);
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
+            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDatos.Size = new Size(800, 310);
             dgvDatos.TabIndex = 0;
             // 
@@ -274,6 +312,14 @@
             colGenero.HeaderText = "Género";
             colGenero.Name = "colGenero";
             colGenero.ReadOnly = true;
+            // 
+            // socioAZToolStripMenuItem
+            // 
+            socioAZToolStripMenuItem.Image = Properties.Resources.alphabetical_sorting_480px;
+            socioAZToolStripMenuItem.Name = "socioAZToolStripMenuItem";
+            socioAZToolStripMenuItem.Size = new Size(180, 22);
+            socioAZToolStripMenuItem.Text = "Socio (A-Z)";
+            socioAZToolStripMenuItem.Click += socioAZToolStripMenuItem_Click;
             // 
             // frmSocios
             // 
@@ -323,5 +369,10 @@
         private ToolStripComboBox tcboGeneros;
         private ToolStripMenuItem localidadToolStripMenuItem;
         private ToolStripComboBox tcboLocalidades;
+        private ToolStripDropDownButton tsbOrdenar;
+        private ToolStripMenuItem edad09ToolStripMenuItem;
+        private ToolStripMenuItem edad90ToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem socioAZToolStripMenuItem;
     }
 }
