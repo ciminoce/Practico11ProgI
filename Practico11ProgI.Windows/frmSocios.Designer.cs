@@ -28,14 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSocios));
             toolStrip1 = new ToolStrip();
             tsbNuevo = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
             tsbEditar = new ToolStripButton();
             tsbDetalles = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            tsbFiltrar = new ToolStripButton();
+            tsbFiltrar = new ToolStripDropDownButton();
+            géneroToolStripMenuItem = new ToolStripMenuItem();
+            tcboGeneros = new ToolStripComboBox();
+            localidadToolStripMenuItem = new ToolStripMenuItem();
+            tcboLocalidades = new ToolStripComboBox();
+            tsbBuscar = new ToolStripButton();
             tsbActualizar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             tsbSalir = new ToolStripButton();
@@ -57,92 +61,132 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbNuevo, tsbBorrar, tsbEditar, tsbDetalles, toolStripSeparator1, tsbFiltrar, tsbActualizar, toolStripSeparator2, tsbSalir });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbNuevo, tsbBorrar, tsbEditar, tsbDetalles, toolStripSeparator1, tsbFiltrar, tsbBuscar, tsbActualizar, toolStripSeparator2, tsbSalir });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 38);
+            toolStrip1.Size = new Size(800, 70);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
             // tsbNuevo
             // 
-            tsbNuevo.Image = (Image)resources.GetObject("tsbNuevo.Image");
+            tsbNuevo.Image = Properties.Resources.add_file_48px;
             tsbNuevo.ImageScaling = ToolStripItemImageScaling.None;
             tsbNuevo.ImageTransparentColor = Color.Magenta;
             tsbNuevo.Name = "tsbNuevo";
-            tsbNuevo.Size = new Size(46, 35);
+            tsbNuevo.Size = new Size(52, 67);
             tsbNuevo.Text = "Nuevo";
             tsbNuevo.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbNuevo.Click += tsbNuevo_Click;
             // 
             // tsbBorrar
             // 
-            tsbBorrar.Image = (Image)resources.GetObject("tsbBorrar.Image");
+            tsbBorrar.Image = Properties.Resources.delete_file_48px;
             tsbBorrar.ImageScaling = ToolStripItemImageScaling.None;
             tsbBorrar.ImageTransparentColor = Color.Magenta;
             tsbBorrar.Name = "tsbBorrar";
-            tsbBorrar.Size = new Size(43, 35);
+            tsbBorrar.Size = new Size(52, 67);
             tsbBorrar.Text = "Borrar";
             tsbBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbBorrar.Click += tsbBorrar_Click;
             // 
             // tsbEditar
             // 
-            tsbEditar.Image = (Image)resources.GetObject("tsbEditar.Image");
+            tsbEditar.Image = Properties.Resources.edit_file_48px;
             tsbEditar.ImageScaling = ToolStripItemImageScaling.None;
             tsbEditar.ImageTransparentColor = Color.Magenta;
             tsbEditar.Name = "tsbEditar";
-            tsbEditar.Size = new Size(41, 35);
+            tsbEditar.Size = new Size(52, 67);
             tsbEditar.Text = "Editar";
             tsbEditar.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbEditar.Click += tsbEditar_Click;
             // 
             // tsbDetalles
             // 
-            tsbDetalles.Image = (Image)resources.GetObject("tsbDetalles.Image");
+            tsbDetalles.Image = Properties.Resources.content_48px;
+            tsbDetalles.ImageScaling = ToolStripItemImageScaling.None;
             tsbDetalles.ImageTransparentColor = Color.Magenta;
             tsbDetalles.Name = "tsbDetalles";
-            tsbDetalles.Size = new Size(52, 35);
+            tsbDetalles.Size = new Size(52, 67);
             tsbDetalles.Text = "Detalles";
             tsbDetalles.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbDetalles.Click += tsbDetalles_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 38);
+            toolStripSeparator1.Size = new Size(6, 70);
             // 
             // tsbFiltrar
             // 
-            tsbFiltrar.Image = (Image)resources.GetObject("tsbFiltrar.Image");
+            tsbFiltrar.DropDownItems.AddRange(new ToolStripItem[] { géneroToolStripMenuItem, localidadToolStripMenuItem });
+            tsbFiltrar.Image = Properties.Resources.filled_filter_48px;
             tsbFiltrar.ImageScaling = ToolStripItemImageScaling.None;
             tsbFiltrar.ImageTransparentColor = Color.Magenta;
             tsbFiltrar.Name = "tsbFiltrar";
-            tsbFiltrar.Size = new Size(41, 35);
+            tsbFiltrar.Size = new Size(61, 67);
             tsbFiltrar.Text = "Filtrar";
             tsbFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
+            // géneroToolStripMenuItem
+            // 
+            géneroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tcboGeneros });
+            géneroToolStripMenuItem.Name = "géneroToolStripMenuItem";
+            géneroToolStripMenuItem.Size = new Size(125, 22);
+            géneroToolStripMenuItem.Text = "Género";
+            // 
+            // tcboGeneros
+            // 
+            tcboGeneros.Name = "tcboGeneros";
+            tcboGeneros.Size = new Size(121, 23);
+            tcboGeneros.SelectedIndexChanged += tcboGeneros_SelectedIndexChanged;
+            // 
+            // localidadToolStripMenuItem
+            // 
+            localidadToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tcboLocalidades });
+            localidadToolStripMenuItem.Name = "localidadToolStripMenuItem";
+            localidadToolStripMenuItem.Size = new Size(125, 22);
+            localidadToolStripMenuItem.Text = "Localidad";
+            // 
+            // tcboLocalidades
+            // 
+            tcboLocalidades.Name = "tcboLocalidades";
+            tcboLocalidades.Size = new Size(121, 23);
+            // 
+            // tsbBuscar
+            // 
+            tsbBuscar.Image = Properties.Resources.search_48px;
+            tsbBuscar.ImageScaling = ToolStripItemImageScaling.None;
+            tsbBuscar.ImageTransparentColor = Color.Magenta;
+            tsbBuscar.Name = "tsbBuscar";
+            tsbBuscar.Size = new Size(52, 67);
+            tsbBuscar.Text = "Buscar";
+            tsbBuscar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbBuscar.Click += tsbBuscar_Click;
+            // 
             // tsbActualizar
             // 
-            tsbActualizar.Image = (Image)resources.GetObject("tsbActualizar.Image");
+            tsbActualizar.Image = Properties.Resources.restart_48px;
             tsbActualizar.ImageScaling = ToolStripItemImageScaling.None;
             tsbActualizar.ImageTransparentColor = Color.Magenta;
             tsbActualizar.Name = "tsbActualizar";
-            tsbActualizar.Size = new Size(63, 35);
+            tsbActualizar.Size = new Size(63, 67);
             tsbActualizar.Text = "Actualizar";
             tsbActualizar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbActualizar.Click += tsbActualizar_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 38);
+            toolStripSeparator2.Size = new Size(6, 70);
             // 
             // tsbSalir
             // 
-            tsbSalir.Image = (Image)resources.GetObject("tsbSalir.Image");
+            tsbSalir.Image = Properties.Resources.exit_48px;
             tsbSalir.ImageScaling = ToolStripItemImageScaling.None;
             tsbSalir.ImageTransparentColor = Color.Magenta;
             tsbSalir.Name = "tsbSalir";
-            tsbSalir.Size = new Size(33, 35);
+            tsbSalir.Size = new Size(52, 67);
             tsbSalir.Text = "Salir";
             tsbSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             tsbSalir.Click += tsbSalir_Click;
@@ -178,9 +222,9 @@
             // 
             panelGrilla.Controls.Add(dgvDatos);
             panelGrilla.Dock = DockStyle.Fill;
-            panelGrilla.Location = new Point(0, 38);
+            panelGrilla.Location = new Point(0, 70);
             panelGrilla.Name = "panelGrilla";
-            panelGrilla.Size = new Size(800, 342);
+            panelGrilla.Size = new Size(800, 310);
             panelGrilla.TabIndex = 2;
             // 
             // dgvDatos
@@ -193,7 +237,7 @@
             dgvDatos.Location = new Point(0, 0);
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
-            dgvDatos.Size = new Size(800, 342);
+            dgvDatos.Size = new Size(800, 310);
             dgvDatos.TabIndex = 0;
             // 
             // colDni
@@ -259,7 +303,6 @@
         private ToolStripButton tsbBorrar;
         private ToolStripButton tsbEditar;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton tsbFiltrar;
         private ToolStripButton tsbActualizar;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton tsbSalir;
@@ -274,5 +317,11 @@
         private DataGridViewTextBoxColumn colCategoria;
         private DataGridViewTextBoxColumn colGenero;
         private ToolStripButton tsbDetalles;
+        private ToolStripButton tsbBuscar;
+        private ToolStripDropDownButton tsbFiltrar;
+        private ToolStripMenuItem géneroToolStripMenuItem;
+        private ToolStripComboBox tcboGeneros;
+        private ToolStripMenuItem localidadToolStripMenuItem;
+        private ToolStripComboBox tcboLocalidades;
     }
 }

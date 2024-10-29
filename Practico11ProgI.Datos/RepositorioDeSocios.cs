@@ -111,5 +111,20 @@ namespace Practico11ProgI.Datos
         {
             socios!.Remove(persona);
         }
+
+        public List<Persona>? FiltrarPorGenero(Genero genero)
+        {
+            return socios!.Where(s=>s.Genero==genero).ToList();
+        }
+
+        public int GetCantidad(Genero genero)
+        {
+            return socios!.Count(s => s.Genero == genero);
+        }
+
+        public bool BuscarPorDni(int dniBuscado)
+        {
+            return socios!.Any(s => s.Dni == dniBuscado);
+        }
     }
 }

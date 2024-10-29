@@ -22,7 +22,7 @@ namespace Practico11ProgI.Windows
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            frmSociosAE frm = new frmSociosAE() { Text = "Nuevo Socio" };
+            frmSociosAE frm = new frmSociosAE(repo!) { Text = "Nuevo Socio" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
             Persona? personaIngresada = frm.GetPersona();
@@ -44,10 +44,27 @@ namespace Practico11ProgI.Windows
 
         private void frmSocios_Load(object sender, EventArgs e)
         {
-            listaSocios = repo!.GetSocios();
+            CargarDatosComboGeneros(ref tcboGeneros);
             cantidadSocios = repo!.GetCantidad();
+            RecargarGrilla();
+        }
+
+        private void RecargarGrilla()
+        {
+            listaSocios = repo!.GetSocios();
             MostrarDatosEnGrilla();
             MostrarTotales();
+        }
+
+        private void CargarDatosComboGeneros(ref ToolStripComboBox tcboGeneros)
+        {
+            var listaGeneros = Enum.GetValues(typeof(Genero));
+            tcboGeneros.Items.Add("Seleccione");
+            foreach (var item in listaGeneros)
+            {
+                tcboGeneros.Items.Add(item);
+            }
+            tcboGeneros.SelectedIndex = 0;
         }
 
         private void MostrarTotales()
@@ -120,9 +137,9 @@ namespace Practico11ProgI.Windows
         private void tsbEditar_Click(object sender, EventArgs e)
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
-            var rSeleccionada= dgvDatos.SelectedRows[0];
+            var rSeleccionada = dgvDatos.SelectedRows[0];
             Persona? p = (Persona)rSeleccionada.Tag!;
-            frmSociosAE frm = new frmSociosAE() { Text = "Editar Socio" };
+            frmSociosAE frm = new frmSociosAE(repo!) { Text = "Editar Socio" };
             frm.SetSocio(p);
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
@@ -133,5 +150,68 @@ namespace Practico11ProgI.Windows
                 MessageBoxIcon.Information);
 
         }
+
+        private void tsbDetalles_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            var r = dgvDatos.SelectedRows[0];
+            Persona p = (Persona)r.Tag;
+            frmDetallesSocio frm = new frmDetallesSocio() { Text = "Detalles del Socio" };
+            frm.SetSocio(p);
+            frm.ShowDialog(this);
+        }
+
+        private void tcboGeneros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcboGeneros.SelectedIndex == 0)
+            {
+                return;
+            }
+            tsbFiltrar.Enabled = false;
+            Genero genero = (Genero)tcboGeneros.SelectedItem;
+            listaSocios = repo.FiltrarPorGenero(genero);
+            cantidadSocios = repo.GetCantidad(genero);
+            MostrarDatosEnGrilla();
+            MostrarTotales();
+        }
+
+        private void tsbActualizar_Click(object sender, EventArgs e)
+        {
+            cantidadSocios = repo.GetCantidad();
+            RecargarGrilla();
+            tsbFiltrar.Enabled = true;
+
+        }
+
+        private void tsbBuscar_Click(object sender, EventArgs e)
+        {
+            string dniString = Microsoft.VisualBasic.Interaction.InputBox("Ingrese el DNI",
+                "Buscar por DNI", "0");
+            if (string.IsNullOrEmpty(dniString))
+            {
+                return;
+            }
+            if (ValidoDni(dniString))
+            {
+                bool existe = repo.BuscarPorDni(int.Parse(dniString));
+            }
+        }
+
+        private bool ValidoDni(string dniString)
+        {
+            if (dniString.Length < 8)
+            {
+                return false;
+            }
+            if (!int.TryParse(dniString, out _))
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

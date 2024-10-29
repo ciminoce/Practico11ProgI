@@ -1,20 +1,50 @@
-﻿using Practico11ProgI.Entidades;
+﻿using Practico11ProgI.Datos;
+using Practico11ProgI.Entidades;
 
 namespace Practico11ProgI.Windows
 {
     public partial class frmSociosAE : Form
     {
         private Persona? persona;
-        public frmSociosAE()
+        private RepositorioDeSocios? _repo;
+        public frmSociosAE(RepositorioDeSocios repo)
         {
             InitializeComponent();
+            _repo = repo;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (persona is not null)
+            {
+                txtDNI.Text = persona.Dni.ToString();
+                txtDNI.Enabled=false;
+                txtPrimerNombre.Text = persona.PrimerNombre;
+                txtSegundoNombre.Text = persona.SegundoNombre;
+                txtTercerNombre.Text=persona.TercerNombre;
+                txtApellido.Text = persona.Apellido;
 
+                dtpFechaNac.Value = persona.FechaNacimiento;
+                cboLocalidades.SelectedItem =persona.Localidad;
+
+                if (persona.Genero==Genero.Femenino)
+                {
+                    rbtFemenino.Checked = true;
+                }
+                else
+                {
+                    rbtMasculino.Checked = true;
+                }
+
+                chkActivo.Checked=persona.Activo;
+
+            }
+        }
         private void frmSociosAE_Load(object sender, EventArgs e)
         {
             chkActivo.Checked = true;
@@ -34,7 +64,11 @@ namespace Practico11ProgI.Windows
         {
             if (ValidarDatos())
             {
-                persona = new Persona();
+                if(persona is null)
+                {
+                    persona = new Persona();
+
+                }
                 persona.Dni=int.Parse(txtDNI.Text);
                 persona.PrimerNombre = txtPrimerNombre.Text;
                 persona.SegundoNombre=txtSegundoNombre.Text;
@@ -62,14 +96,28 @@ namespace Practico11ProgI.Windows
             }
             if (!ValidoDni(txtDNI.Text))
             {
+
                 valido = false;
                 errorProvider1.SetError(txtDNI, "DNI no válido");
+
+            }
+            else {
+                if (_repo.GetSocios()!.Any(s => s.Dni == int.Parse(txtDNI.Text)))
+                {
+                    valido = false;
+                    errorProvider1.SetError(txtDNI, "DNI existente!!!");
+                }
 
             }
             if (string.IsNullOrEmpty(txtPrimerNombre.Text))
             {
                 valido = false;
                 errorProvider1.SetError(txtPrimerNombre, "Primer nombre es requerido");
+            }
+            if(!string.IsNullOrEmpty(txtTercerNombre.Text) && string.IsNullOrEmpty(txtSegundoNombre.Text))
+            {
+                valido = false;
+                errorProvider1.SetError(txtTercerNombre, "Debe tener segundo nombre");
             }
             if (string.IsNullOrEmpty(txtApellido.Text))
             {
